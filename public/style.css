@@ -56,7 +56,6 @@ a.figure-number::before {
 	content: ":";
 } */
 
-#rebuttal,
 .response-info {
 	margin: 1em 0;
 	background-color: hsl(228, 50%, 97%);
