@@ -697,8 +697,9 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
         <p><b>Response</b>: As mentioned <a href="#nonclaim1">above</a>,
             we did not intend to claim
             that adversarial examples arise <em>exclusively</em> from (useful) features but rather
-            that non-robust features are (at least partially) responsible. In fact, prior
-            work already shows how in theory adversarial examples can arise from
+            that useful non-robust features exist and are thus (at least
+	    partially) responsible for adversarial vulnerability. In fact,
+	    prior work already shows how in theory adversarial examples can arise from
             insufficient samples <d-cite key="schmidt2018adversarially"></d-cite> or finite-sample overfitting <d-cite
                 key="tanay2016boundary"></d-cite>, and the experiments
             presented here (particularly, the adversarial squares) constitute a neat
@@ -709,6 +710,17 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
             stemming from "bugs." As long as adversarial examples can stem from non-robust
             features (which the commenter seems to agree with), fixing these bugs will not
             solve the problem of adversarial examples. </p>
+
+	<p>Moreover, with regards to feature "leakage" from PGD, recall that in
+	or D_det dataset, the non-robust features are associated with the
+	correct label whereas the robust features are associated with the wrong
+	one. We wanted to emphasize that, as shown in [Appendix D.6](LINK),
+	models trained on our D_det dataset actually generalize <i>better</i> to
+	the non-robust feature-label association that to the robust
+	feature-label association. In contrast, if PGD introduced a small
+	"leakage" of non-robust features, then we would expect the trained model
+	would still predominantly use the robust feature-label association. </p>
+
 
         <p> That said, the experiments cleverly zoom in on some more fine-grained
             nuances in our understanding of adversarial examples. One particular thing that
