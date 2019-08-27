@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://distill.pub/template.v2.js"></script>
     <style>
-        <%=require("raw-loader!../static/style.css") %>
-        
-        #header-info #header-info-comment-link {
+        <%=require("raw-loader!../static/style.css") %>#header-info #header-info-comment-link {
             display: none;
         }
     </style>
@@ -263,52 +261,47 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
 
         <h2>Responses to comments</h2>
 
-        <h3><a name="GabrielResponse1">Two Examples of Useful, Non-Robust Features (Gabriel Goh)</a></h3>
-        <p><b>Response Summary</b>: The construction of explicit non-robust features is
-            very interesting and makes progress towards the challenge of visualizing some of
-            the useful non-robust features detected by our experiments. We also agree that
-            non-robust features arising as “distractors” is indeed not precluded by our
-            theoretical framework, even if it is precluded by our experiments.
-            This simple theoretical framework sufficed for reasoning about and
-            predicting the outcomes of our experiments
-            <d-footnote>We also presented a theoretical setting where we can
-                analyze things fully rigorously in Section 4 of our paper.</d-footnote>.
-            However, this comment rightly identifies finding a more comprehensive
-            definition of feature as an important future research direction.
+        <h3><a name="DanJustinResponse">Adversarial Example Researchers Need to Expand What is Meant by
+                "Robustness" (Dan Hendrycks, Justin Gilmer)</a></h3>
+
+        <p><b>Response Summary</b>:
+            The demonstration of models that learn from only high-frequency components of the data is
+            an interesting finding that provides us with another way our models can learn from data that
+            appears “meaningless” to humans.
+            The authors fully agree that studying a wider notion of robustness will become increasingly
+            important in ML, and will help us get a better grasp of features we actually want our models
+            to rely on.
         </p>
 
-        <p><b>Response</b>: These experiments (visualizing the robustness and
-            usefulness of different linear features) are very interesting! They both further
-            corroborate the existence of useful, non-robust features and make progress
-            towards visualizing what these non-robust features actually look like. </p>
+        <p><b>Response</b>: The fact that models can learn to classify correctly based
+            purely on the high-frequency component of the training set is neat! This nicely
+            complements one of our <a href="#takeaway1">takeaways</a>: models will rely on
+            useful features even if these features appear incomprehensible to humans. </p>
 
-        <p>We also appreciate the point made by the provided construction of non-robust
-            features (as defined in our theoretical framework) that are combinations of
-            useful+robust and useless+non-robust features. Our theoretical framework indeed
-            enables such a scenario, even if&mdash;as the commenter already notes&mdash;our
-            experimental results do not. (In this sense, the experimental results and our <a href="#takeaway1"> main
-                takeaway
-            </a> are actually stronger than our theoretical
-            framework technically captures.) Specifically, in such a scenario, during the
-            construction of the \(\widehat{\mathcal{D}}_{det}\) dataset, only the non-robust
-            and useless term of the feature would be flipped. Thus, a classifier trained on
-            such a dataset would associate the predictive robust feature with the
-            <em>wrong</em> label and would thus not generalize on the test set. In contrast,
-            our experiments show that classifiers trained on \(\widehat{\mathcal{D}}_{det}\)
-            do generalize.</p>
+        <p> Also, while non-robustness to noise can be an indicator of models using
+            non-robust useful features, this is not how the phenomenon was predominantly viewed.
+            More often than not, the brittleness of ML models to noise was instead regarded
+            as an innate shortcoming of the models, e.g., due to poor margins. (This view is
+            even more prevalent in the adversarial robustness community.) Thus, it was often
+            expected that progress towards "better"/”bug-free” models will lead to them
+            being more robust to noise and adversarial examples. </p>
 
-        <p>Overall, our focus while developing our theoretical framework was on
-            enabling us to formally describe and predict the outcomes of our experiments. As
-            the comment points out, putting forth a theoretical framework that captures
-            non-robust features in a very precise way is an important future research
-            direction in itself. </p>
+        <p> Finally, we fully agree that the set of \(L_p\)-bounded perturbations is a very
+            small subset of the perturbations we want our models to be robust to. Note,
+            however, that the focus of our work is human-alignment&mdash;to that end, we
+            demonstrate that models rely on features sensitive to patterns that are
+            imperceptible to humans. Thus, the existence of other families of
+            incomprehensible but useful features would provide even more support for our
+            thesis&mdash;identifying and characterizing such features is an interesting area for
+            future research.
+
+        </p>
 
         <h3><a name="GabrielResponse2">Robust Feature Leakage (Gabriel Goh)</a></h3>
-        <p><b>Response Summary</b>: This
-            is a valid concern that was actually one of our motivations for creating the
-            \(\widehat{\mathcal{D}}_{det}\) dataset (which, as the comment notes, actually
-            has <em>misleading</em> robust features). The provided experiment further
-            improves our understanding of the underlying phenomenon. </p>
+        <p><b>Response Summary</b>:
+            This is a nice in-depth investigation that highlights (and neatly visualizes) one of
+            the motivations for designing the $\widehat{\mathcal{D}}_{det}$ dataset.
+        </p>
 
         <p><b>Response</b>: This comment raises a valid concern which was in fact one of
             the primary reasons for designing the \(\widehat{\mathcal{D}}_{det}\) dataset.
@@ -351,56 +344,48 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
             <a href="https://arxiv.org/abs/1905.02175">paper</a>).</p>
 
 
-        <h3><a name="DanJustinResponse">Adversarial Example Researchers Need to Expand What is Meant by
-                "Robustness" (Dan Hendrycks, Justin Gilmer)</a></h3>
-
-        <p><b>Response Summary</b>: The demonstration of models that learn from
-            high-frequency components of the data is interesting and nicely aligns with our
-            findings. Now, even though susceptibility to noise could indeed arise from
-            non-robust useful features, this kind of brittleness (akin to adversarial examples)
-            of ML models has been so far predominantly viewed as a consequence of model
-            “bugs” that will be eliminated by “better” models. Finally, we agree that our
-            models need to be robust to a much broader set of perturbations&mdash;expanding the
-            set of relevant perturbations will help identify even more non-robust features
-            and further distill the useful features we actually want our models to rely on.
-
+        <h3><a name="GabrielResponse1">Two Examples of Useful, Non-Robust Features (Gabriel Goh)</a></h3>
+        <p><b>Response Summary</b>: These experiments with linear models are a great first step towards visualizing
+            non-robust features for real datasets (and thus a neat corroboration of their existence).
+            Furthermore, the theoretical construction of "contaminated" non-robust features opens an
+            interesting direction of developing a more fine-grained definition of features.
         </p>
 
-        <p><b>Response</b>: The fact that models can learn to classify correctly based
-            purely on the high-frequency component of the training set is neat! This nicely
-            complements one of our <a href="#takeaway1">takeaways</a>: models will rely on
-            useful features even if these features appear incomprehensible to humans. </p>
+        <p><b>Response</b>: These experiments (visualizing the robustness and
+            usefulness of different linear features) are very interesting! They both further
+            corroborate the existence of useful, non-robust features and make progress
+            towards visualizing what these non-robust features actually look like. </p>
 
-        <p> Also, while non-robustness to noise can be an indicator of models using
-            non-robust useful features, this is not how the phenomenon was predominantly viewed.
-            More often than not, the brittleness of ML models to noise was instead regarded
-            as an innate shortcoming of the models, e.g., due to poor margins. (This view is
-            even more prevalent in the adversarial robustness community.) Thus, it was often
-            expected that progress towards "better"/”bug-free” models will lead to them
-            being more robust to noise and adversarial examples. </p>
+        <p>We also appreciate the point made by the provided construction of non-robust
+            features (as defined in our theoretical framework) that are combinations of
+            useful+robust and useless+non-robust features. Our theoretical framework indeed
+            enables such a scenario, even if&mdash;as the commenter already notes&mdash;our
+            experimental results do not. (In this sense, the experimental results and our <a href="#takeaway1"> main
+                takeaway
+            </a> are actually stronger than our theoretical
+            framework technically captures.) Specifically, in such a scenario, during the
+            construction of the \(\widehat{\mathcal{D}}_{det}\) dataset, only the non-robust
+            and useless term of the feature would be flipped. Thus, a classifier trained on
+            such a dataset would associate the predictive robust feature with the
+            <em>wrong</em> label and would thus not generalize on the test set. In contrast,
+            our experiments show that classifiers trained on \(\widehat{\mathcal{D}}_{det}\)
+            do generalize.</p>
 
-        <p> Finally, we fully agree that the set of \(L_p\)-bounded perturbations is a very
-            small subset of the perturbations we want our models to be robust to. Note,
-            however, that the focus of our work is human-alignment&mdash;to that end, we
-            demonstrate that models rely on features sensitive to patterns that are
-            imperceptible to humans. Thus, the existence of other families of
-            incomprehensible but useful features would provide even more support for our
-            thesis&mdash;identifying and characterizing such features is an interesting area for
-            future research.
+        <p>Overall, our focus while developing our theoretical framework was on
+            enabling us to formally describe and predict the outcomes of our experiments. As
+            the comment points out, putting forth a theoretical framework that captures
+            non-robust features in a very precise way is an important future research
+            direction in itself. </p>
 
-        </p>
 
         <h3><a name="ReiichiroResponse"> Adversarially Robust Neural Style Transfer
                 (Reiichiro Nakano)</a></h3>
-        <p><b>Response Summary</b>: Very interesting
-            results, highlighting the effect of non-robust features and the utility of
-            robust models for downstream tasks. We’re excited to see what kind of impact
-            robustly trained models will have in neural network art! We were also really
-            intrigued by the mysteriousness of VGG in the context of style transfer<d-cite key="gatys2015"></d-cite>. As
-            such,
-            we took a
-            deeper dive which found some interesting links between robustness and style
-            transfer that suggest that perhaps robustness does indeed play a role here. </p>
+        <p><b>Response Summary</b>:
+            Very interesting results that highlight the potential role of non-robust features and the
+            utility of robust models for downstream tasks. We're excited to see what kind of impact robustly
+            trained models will have in neural network art!
+            Inspired by these findings, we also take a deeper dive into (non-robust) VGG, and find some
+            interesting links between robustness and style transfer. </p>
 
         <p><b>Response</b>: These experiments are really cool! It is interesting that
             preventing the reliance of a model on non-robust features improves performance
@@ -527,22 +512,20 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
 
         <h3> <a name="PreetumResponse">Adversarial Examples are Just Bugs, Too (Preetum
                 Nakkiran) </a></h3>
-        <p><b>Response Summary</b>: We note that as discussed in
-            more detail in <a href="#takeaway1">Takeaway #1</a>, the mere existence of adversarial
-            examples
-            that are “features” is sufficient to corroborate our main thesis. This comment
-            illustrates, however, that we can indeed craft adversarial examples that are
-            based on “bugs” in realistic settings. Interestingly, such examples don’t
-            transfer, which provides further support for the link between transferability
-            and non-robust features.
-
+        <p><b>Response Summary</b>:
+            A fine-grained look at adversarial examples that neatly complements our thesis (i.e. that non-robust
+            features exist and adversarial examples arise from them, see <a href="#takeaway1">Takeaway #1</a>) while
+            providing an
+            example of adversarial examples that arise from "bugs".
+            The fact that the constructed "bugs"-based adversarial examples don't transfer constitutes
+            another evidence for the link between transferability and (non-robust) features.
         </p>
         <p><b>Response</b>: As mentioned <a href="#nonclaim1">above</a>,
             we did not intend to claim
             that adversarial examples arise <em>exclusively</em> from (useful) features but rather
             that useful non-robust features exist and are thus (at least
-	    partially) responsible for adversarial vulnerability. In fact,
-	    prior work already shows how in theory adversarial examples can arise from
+            partially) responsible for adversarial vulnerability. In fact,
+            prior work already shows how in theory adversarial examples can arise from
             insufficient samples <d-cite key="schmidt2018adversarially"></d-cite> or finite-sample overfitting <d-cite
                 key="tanay2016boundary"></d-cite>, and the experiments
             presented here (particularly, the adversarial squares) constitute a neat
@@ -554,15 +537,15 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
             features (which the commenter seems to agree with), fixing these bugs will not
             solve the problem of adversarial examples. </p>
 
-	<p>Moreover, with regards to feature "leakage" from PGD, recall that in
-	or D_det dataset, the non-robust features are associated with the
-	correct label whereas the robust features are associated with the wrong
-	one. We wanted to emphasize that, as shown in [Appendix D.6](LINK),
-	models trained on our D_det dataset actually generalize <i>better</i> to
-	the non-robust feature-label association that to the robust
-	feature-label association. In contrast, if PGD introduced a small
-	"leakage" of non-robust features, then we would expect the trained model
-	would still predominantly use the robust feature-label association. </p>
+        <p>Moreover, with regards to feature "leakage" from PGD, recall that in
+            or D_det dataset, the non-robust features are associated with the
+            correct label whereas the robust features are associated with the wrong
+            one. We wanted to emphasize that, as shown in [Appendix D.6](LINK),
+            models trained on our D_det dataset actually generalize <i>better</i> to
+            the non-robust feature-label association that to the robust
+            feature-label association. In contrast, if PGD introduced a small
+            "leakage" of non-robust features, then we would expect the trained model
+            would still predominantly use the robust feature-label association. </p>
 
 
         <p> That said, the experiments cleverly zoom in on some more fine-grained
@@ -587,19 +570,11 @@ datasets"> http://git.io/adv-datasets</a> </d-footnote>:
         </figure>
 
         <h3><a name="EricResponse">Learning from Incorrectly Labeled Data (Eric Wallace)</a></h3>
-        <p><b>Response
-                Summary</b>: Note that since our experiments work across different architectures,
-            “distillation” in weight space does not occur. The only distillation that can
-            arise is “feature space” distillation, which is actually exactly our hypothesis.
-            In particular, feature-space distillation would not work in <a href="#world1">
-                World 1</a>&mdash;if the
-            adversarial examples we generated did not exploit useful features, we should not
-            have been able to “distill” a useful model from them. (In fact, one might think
-            of normal model training as just “feature distillation” of the humans that
-            labeled the dataset.) Furthermore, the hypothesis that all we need is enough
-            model-consistent points in order to recover a model, seems to be disproven by
-            Preetum’s <a href="#PreetumResponse"> “bugs-only dataset”</a>
-            and other (e.g. <d-cite key="milli2018model"></d-cite>) settings. </p>
+        <p><b>Response Summary</b>:
+            These experiments are a creative demonstration of the fact that the underlying phenomenon of
+            learning features from “human-meaningless” data can actually arise in a broad range of
+            settings.
+        </p>
 
         <p><b>Response</b>: Since our experiments work across different architectures,
             “distillation” in weight space cannot arise. Thus, from what we understand, the
